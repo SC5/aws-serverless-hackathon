@@ -1,0 +1,45 @@
+{
+  "name": "aws-serverless-hackaton",
+  "version": "1.0.0",
+  "description": "SC5's aws-serverless hackaton",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "typings": "typings",
+    "postinstall": "typings install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SC5/aws-serverless-hackaton.git"
+  },
+  "keywords": [
+    "aws",
+    "serverless",
+    "hackaton",
+    "sc5"
+  ],
+  "author": "Alex Kozlov <alex.kozlov@sc5.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SC5/aws-serverless-hackaton/issues"
+  },
+  "homepage": "https://github.com/SC5/aws-serverless-hackaton#readme",
+  "dependencies": {
+    "angular2": "2.0.0-beta.7",
+    "systemjs": "0.19.22",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.3",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "zone.js": "0.5.15"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "lite-server": "^2.1.0",
+    "typescript": "^1.7.5",
+    "typings":"^0.6.8"
+  }
+}
