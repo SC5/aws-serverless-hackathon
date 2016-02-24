@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Wrapper script for locally installed serverless client
+# can be found in node_modules/.bin/
+
+node_modules/.bin/serverless $@
