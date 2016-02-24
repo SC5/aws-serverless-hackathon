@@ -1,13 +1,13 @@
-# SC5's AWS - serverless hackaton 2016
+# SC5's AWS - serverless hackathon 2016
 
 ### What you need
 * Node.js and npm: https://nodejs.org/en/
 
 
-### Instalation
+### Installation
  * Clone GIT repository
 ```bash
-git clone git@github.com:SC5/aws-serverless-hackaton.git
+git clone git@github.com:SC5/aws-serverless-hackathon.git
 ```
  * Install packages
 ```bash
