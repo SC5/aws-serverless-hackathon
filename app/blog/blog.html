@@ -1,4 +1,4 @@
-<div *ngIf="posts.length == 0" class="col-sm-12">
+<div *ngIf="posts.length == 0 && !newStoryFormVisible" class="col-sm-12">
   <div class="jumbotron">
     <h2>Nothing to see yet here!</h2>
     <p>...</p>
@@ -13,27 +13,28 @@
   </div>
 </div>
 
-<div class="col-sm-12 new-story__holder" *ngIf="newStoryFormVisible == true">
+<div class="col-sm-12 new-story__holder" *ngIf="newStoryFormVisible">
   <div class="col-sm-12 new-story__holder__items">
-    <input type="text" class="form-control" placeholder="Title" aria-describedby="title">
-    <textarea cols="30" rows="10" class="form-control" placeholder="Content" aria-describedby="content"></textarea>
+    <input [(ngModel)]="editableItem.id" name="id" type="text" hidden>
+    <input [(ngModel)]="editableItem.title" name="title" type="text" class="form-control" placeholder="Title" aria-describedby="title">
+    <textarea [(ngModel)]="editableItem.content" name="content" cols="30" rows="10" class="form-control" placeholder="Content"></textarea>
     <button type="button"
             name="button"
             class="btn btn-lg btn-success"
-            (click)="saveNewStory()">
+            (click)="saveStory()">
       save
     </button>
   </div>
 </div>
 
-<div class="col-sm-12" *ngIf="newStoryFormVisible == false">
-  <div class="alert alert-success alert-dismissible" role="alert" *ngIf="alertVisible">
+<div class="col-sm-12" *ngIf="!newStoryFormVisible && posts.length > 0">
+  <div class="alert alert-{{ alert.type }} alert-dismissible" role="alert" *ngIf="alert.visible">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+    {{ alert.message }}
   </div>
-  <div class="col-sm-12" *ngIf="posts.length > 0">
+  <div class="col-sm-12">
     <div class="col-sm-12 blog__header__new-button">
       <button type="button"
               name="button"
@@ -44,7 +45,7 @@
     </div>
     <div *ngFor="#post of posts" class="col-sm-12 post__item">
       <div class="col-sm-12 post__item__date">
-        [ {{ post.date }} ]
+        [ {{ post.date | date:'fullDate' }} ]
       </div>
       <div class="col-sm-12 post__item__title">
         <h3>{{ post.title }}</h3>
