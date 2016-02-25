@@ -1,0 +1,71 @@
+<div *ngIf="posts.length == 0" class="col-sm-12">
+  <div class="jumbotron">
+    <h2>Nothing to see yet here!</h2>
+    <p>...</p>
+    <p>
+      <button type="button"
+              name="button"
+              class="btn btn-lg btn-success"
+              (click)="addNewStoryClicked()">
+        add new story
+      </button>
+    </p>
+  </div>
+</div>
+
+<div class="col-sm-12 new-story__holder" *ngIf="newStoryFormVisible == true">
+  <div class="col-sm-12 new-story__holder__items">
+    <input type="text" class="form-control" placeholder="Title" aria-describedby="title">
+    <textarea cols="30" rows="10" class="form-control" placeholder="Content" aria-describedby="content"></textarea>
+    <button type="button"
+            name="button"
+            class="btn btn-lg btn-success"
+            (click)="saveNewStory()">
+      save
+    </button>
+  </div>
+</div>
+
+<div class="col-sm-12" *ngIf="newStoryFormVisible == false">
+  <div class="alert alert-success alert-dismissible" role="alert" *ngIf="alertVisible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+  </div>
+  <div class="col-sm-12" *ngIf="posts.length > 0">
+    <div class="col-sm-12 blog__header__new-button">
+      <button type="button"
+              name="button"
+              class="btn btn-lg btn-success"
+              (click)="addNewStoryClicked()">
+        add new story
+      </button>
+    </div>
+    <div *ngFor="#post of posts" class="col-sm-12 post__item">
+      <div class="col-sm-12 post__item__date">
+        [ {{ post.date }} ]
+      </div>
+      <div class="col-sm-12 post__item__title">
+        <h3>{{ post.title }}</h3>
+      </div>
+      <div class="col-sm-12 post__item__content">
+        {{ post.content }}
+      </div>
+      <div class="col-sm-12 push-right post__item__button-holder">
+        <button type="button"
+                name="button"
+                class="btn btn-primary"
+                (click)="editButtonPressed(post)">
+          edit
+        </button>
+        <button type="button"
+                name="button"
+                class="btn btn-danger"
+                (click)="deleteButtonPressed(post)">
+          delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

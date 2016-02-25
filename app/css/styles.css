@@ -1,0 +1,43 @@
+.blog__header {
+  padding-left: 30px;
+}
+
+.blog__header__new-button {
+  text-align: right;
+  padding-right: 50px;
+  padding-bottom: 20px;
+}
+
+.post__item {
+  padding: 20px;
+}
+
+.post__item:nth-child(odd) {
+   background-color: #f3f3f3;
+}
+
+.post__item__title h3 {
+  margin-top: 0;
+}
+
+.post__item__button-holder {
+  padding-top: 20px;
+  text-align: right;
+}
+
+.blog__footer {
+  padding-left: 30px;
+  text-align: right;
+}
+
+.new-story__holder__items input {
+  margin-bottom: 10px;
+}
+
+.new-story__holder__items textarea {
+  margin-bottom: 10px;
+}
+
+.new-story__holder__items button {
+  float: right;
+}
