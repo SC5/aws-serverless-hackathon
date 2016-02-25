@@ -13,7 +13,7 @@ export class Blog {
     message:  "New story is successfully added!",
     visible:  false
   };
-  public editableItem = {};
+  public editableItem;
   public posts = this.sortByDateDesc(
     [{
       id: 1,
