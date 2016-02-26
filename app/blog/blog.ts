@@ -44,6 +44,11 @@ export class Blog {
     this.newStoryFormVisible = true;
   }
 
+  cancelSavingStory() {
+    this.newStoryFormVisible = false;
+    this.editableItem = {};
+  }
+
   saveStory() {
     var message = '';
     var id = this.editableItem.id;

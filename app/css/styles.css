@@ -41,3 +41,7 @@
 .new-story__holder__items button {
   float: right;
 }
+
+.new-story__holder__items .new-story__cancel-button {
+  margin-right: 10px;
+}
