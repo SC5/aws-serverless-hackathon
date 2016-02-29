@@ -1,14 +1,20 @@
 import { Component, OnInit } from "angular2/core";
-import { Http, Headers, HTTP_PROVIDERS } from 'angular2/http';
+import { HTTP_PROVIDERS } from "angular2/http";
+import { HttpServices } from "../http.services";
+import { StorageServices } from "../storage.services";
 
 @Component({
   selector: "my-app",
   templateUrl: "app/blog/blog.html",
-  providers: [HTTP_PROVIDERS]
+  providers: [
+    HTTP_PROVIDERS,
+    HttpServices,
+    StorageServices
+  ]
 })
 
 export class Blog implements OnInit {
-  constructor (private http: Http) {}
+  constructor (private httpServices: HttpServices, private storage: StorageServices) {}
 
   public newStoryFormVisible = false;
   public alert = {
@@ -19,58 +25,29 @@ export class Blog implements OnInit {
   public editableItem;
   public posts = [];
   public setSettingsFormVisible = false;
-  public awsSettings = {};
-  public options = {
-    headers: new Headers({"Accept": "*/*"})
-  };
+  public awsSettings = this.storage.getStorage();
 
   /**
-   * Getting settings from storage
-   * @returns {Object}
+   * Run it on initialization
    */
-  getSettings() {
-    var settings = window.localStorage.getItem("aws_settings");
-    if(!_.isEmpty(settings)){
-      settings = JSON.parse(settings);
+  ngOnInit() {
+    if(this.storage.isStorageEmpty()){
+      this.setSettingsFormVisible = true;
     }
-    return settings;
-  };
 
-  /**
-   * Setting settings to storage
-   */
-  setSettings() {
-    window.localStorage.setItem("aws_settings", JSON.stringify(this.awsSettings));
-  };
+    this.getPosts();
+  }
 
   /**
    * Fetch posts from REST API
    */
   getPosts() {
-    var url = this.awsSettings.url+"/"+this.awsSettings.stage+"/"+this.awsSettings.getPosts;
-
-    this.http.get(url, this.options).subscribe((Response) => {
-      var resp = Response.json();
-      this.posts = _.sortBy(resp.Items, 'date').reverse();
+    this.httpServices.getPosts().subscribe(Response => {
+      this.posts =
+        _.sortBy(Response.json().Items, 'date').reverse();
     });
   }
 
-  ngOnInit() {
-    this.awsSettings = this.getSettings();
-    if(_.isEmpty(this.awsSettings)){
-      this.setSettingsFormVisible = true;
-      this.awsSettings = {
-        url: "",
-        stage: "",
-        deletePost: "",
-        newPost: "",
-        editPost: "",
-        getPosts: ""
-      }
-    }
-
-    this.getPosts();
-  }
 
   closeAlert() {
     this.alert.visible = false;
@@ -86,9 +63,12 @@ export class Blog implements OnInit {
     this.editableItem = {};
   }
 
+  /**
+   * Save or edit story
+   */
   saveStory() {
-    var message = '';
-    var url = this.awsSettings.url+"/"+this.awsSettings.stage+"/";
+    var message = "",
+        action = "new";
 
     this.newStoryFormVisible = false;
 
@@ -96,13 +76,12 @@ export class Blog implements OnInit {
       message = "New story is successfully added!";
       this.editableItem.id = new String(this.posts.length + 1);
       this.editableItem.date = new Date().getTime();
-      url += this.awsSettings.newPost;
     }else{
-      url += this.awsSettings.editPost;
+      action = "edit";
       message = "Story is successfully modified!"
     }
 
-    this.http.post(url, JSON.stringify(this.editableItem), this.options).subscribe((Response) => {
+    this.httpServices.savePost(action, this.editableItem).subscribe(() => {
       this.getPosts();
       if(!_.isEmpty(message)) {
         this.alert = {
@@ -117,9 +96,12 @@ export class Blog implements OnInit {
     this.editableItem = {};
   }
 
+  /**
+   * Saving aws settings
+   */
   saveAWSSettingsClicked() {
     if(!_.isEmpty(this.awsSettings.url)) {
-      this.setSettings();
+      this.storage.setStorage(this.awsSettings);
       this.setSettingsFormVisible = false;
     }
   }
@@ -129,10 +111,13 @@ export class Blog implements OnInit {
     this.editableItem = item;
   }
 
+  /**
+   * Delete story
+   *
+   * @param item {Object}
+   */
   deleteButtonPressed(item) {
-    var url = this.awsSettings.url+"/"+this.awsSettings.stage+"/"+this.awsSettings.deletePost;
-
-    this.http.post(url, JSON.stringify({ id: item.id }), this.options).subscribe((Response) => {
+    this.httpServices.deletePost(item).subscribe(() => {
       this.getPosts();
       this.alert = {
         visible: true,
