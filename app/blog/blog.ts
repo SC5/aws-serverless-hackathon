@@ -1,5 +1,4 @@
 import { Component, OnInit } from "angular2/core";
-import { HTTP_PROVIDERS } from "angular2/http";
 import { HttpServices } from "../http.services";
 import { StorageServices } from "../storage.services";
 
@@ -7,7 +6,6 @@ import { StorageServices } from "../storage.services";
   selector: "my-app",
   templateUrl: "app/blog/blog.html",
   providers: [
-    HTTP_PROVIDERS,
     HttpServices,
     StorageServices
   ]
