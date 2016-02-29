@@ -5,15 +5,15 @@
 
 
 ### Installation
- * Clone GIT repository
+* Clone GIT repository
 ```bash
 git clone git@github.com:SC5/aws-serverless-hackathon.git
 ```
- * Install packages
+* Install packages
 ```bash
 npm install
 ```
- * Now you ready to go!!!
+* Now you ready to go!!!
 
 ### Run it
 ```bash
