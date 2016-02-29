@@ -1,4 +1,4 @@
-# SC5's AWS - serverless hackathon 2016
+#[FRONTEND] AWS - serverless hackathon 2016
 
 ### What you need
 * Node.js and npm: https://nodejs.org/en/

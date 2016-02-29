@@ -45,3 +45,12 @@
 .new-story__holder__items .new-story__cancel-button {
   margin-right: 10px;
 }
+
+.aws-settings__holder input {
+  margin-bottom: 10px;
+}
+
+.aws-settings__holder button {
+  float: right;
+  margin-top: 10px;
+}

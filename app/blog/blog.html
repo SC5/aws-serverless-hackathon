@@ -1,4 +1,26 @@
-<div *ngIf="posts.length == 0 && !newStoryFormVisible" class="col-sm-12">
+<div *ngIf="setSettingsFormVisible" class="col-sm-12">
+  <div class="jumbotron">
+    <h2>Welcome to AWS - Serverless hackaton 2016</h2>
+    <p>Please, add backend parameters and save it.</p>
+  </div>
+  <div class="col sm-12 aws-settings__holder">
+    <input [(ngModel)]="awsSettings.url" name="url" type="text" class="form-control" placeholder="Url (e.g.): https://x8k4kxcyi0.execute-api.eu-west-1.amazonaws.com" aria-describedby="url">
+    <input [(ngModel)]="awsSettings.stage" name="stage" type="text" class="form-control" placeholder="Stage (e.g.): dev" aria-describedby="stage">
+    <br>
+    <input [(ngModel)]="awsSettings.getPosts" name="getPosts" type="text" class="form-control" placeholder="Function name for fetching all posts (e.g.): get-posts" aria-describedby="getPosts">
+    <input [(ngModel)]="awsSettings.newPost" name="newPost" type="text" class="form-control" placeholder="Function name for adding new post (e.g.): new-post" aria-describedby="newPost">
+    <input [(ngModel)]="awsSettings.editPost" name="editPost" type="text" class="form-control" placeholder="Function name for editing post (e.g.): edit-post" aria-describedby="editPost">
+    <input [(ngModel)]="awsSettings.deletePost" name="deletePost" type="text" class="form-control" placeholder="Function name for deleteing post (e.g.): delete-post" aria-describedby="deletePost">
+    <button type="button"
+            name="button"
+            class="btn btn-lg btn-success"
+            (click)="saveAWSSettingsClicked()">
+      save AWS settings
+    </button>
+  </div>
+</div>
+
+<div *ngIf="posts.length == 0 && !newStoryFormVisible && !setSettingsFormVisible" class="col-sm-12">
   <div class="jumbotron">
     <h2>Nothing to see yet here!</h2>
     <p>...</p>
