@@ -1,4 +1,5 @@
 import { Injectable } from "angular2/core";
+declare var _: any;
 
 @Injectable()
 export class StorageServices {

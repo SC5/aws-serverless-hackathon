@@ -1,6 +1,7 @@
 import { Component, OnInit } from "angular2/core";
 import { HttpServices } from "../http.services";
 import { StorageServices } from "../storage.services";
+declare var _: any;
 
 @Component({
   selector: "my-app",
