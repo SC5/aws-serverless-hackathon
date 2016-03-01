@@ -6,7 +6,7 @@ export class StorageServices {
   constructor() {}
 
   getStorage() {
-    if(this.isStorageEmpty()) {
+    if (this.isStorageEmpty()) {
       return {
         url: "",
         stage: "",
@@ -14,8 +14,8 @@ export class StorageServices {
         newPost: "",
         editPost: "",
         getPosts: ""
-      }
-    }else{
+      };
+    } else {
       return JSON.parse(window.localStorage.getItem("aws_settings"));
     }
   }
@@ -25,6 +25,6 @@ export class StorageServices {
   }
 
   isStorageEmpty() {
-    _.isEmpty(window.localStorage.getItem("aws_settings"));
+    return _.isEmpty(window.localStorage.getItem("aws_settings"));
   }
 }

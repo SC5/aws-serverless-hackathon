@@ -30,11 +30,11 @@ export class Blog implements OnInit {
    * Run it on initialization
    */
   ngOnInit() {
-    if(this.storage.isStorageEmpty()){
+    if (this.storage.isStorageEmpty()) {
       this.setSettingsFormVisible = true;
+    } else {
+      this.getPosts();
     }
-
-    this.getPosts();
   }
 
   /**
@@ -43,7 +43,7 @@ export class Blog implements OnInit {
   getPosts() {
     this.httpServices.getPosts().subscribe(Response => {
       this.posts =
-        _.sortBy(Response.json().Items, 'date').reverse();
+        _.sortBy(Response.json().Items, "date").reverse();
     });
   }
 
