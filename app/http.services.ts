@@ -7,7 +7,10 @@ export class HttpServices {
   constructor (private http: Http, private storage: StorageServices) {}
 
   public options = {
-    headers: new Headers({"Accept": "*/*"})
+    headers: new Headers({
+        "Accept": "*/*",
+        "Content-Type": "application/json"
+    })
   };
   public separator = "/" ;
 
@@ -18,11 +21,12 @@ export class HttpServices {
    */
   getPosts() {
     var parameters = this.storage.getStorage(),
-        url = parameters.url +
-              this.separator +
-              parameters.stage +
-              this.separator +
-              parameters.getPosts;
+        url = [ 
+            parameters.url,
+            parameters.stage,
+            "posts"
+        ].join(this.separator);
+    console.log("save " + url);
 
     return this.http.get(url, this.options);
   }
@@ -36,14 +40,18 @@ export class HttpServices {
    */
   savePost(action, storyObject) {
     var parameters = this.storage.getStorage(),
-        lastParam = action === "new" ? parameters.newPost : parameters.editPost,
-        url = parameters.url +
-              this.separator +
-              parameters.stage +
-              this.separator +
-              lastParam;
-
-    return this.http.post(url, JSON.stringify(storyObject), this.options);
+        url = [ 
+            parameters.url,
+            parameters.stage,
+            "posts"
+        ].join(this.separator);
+    console.log("save " + url);
+    
+    if (action==="new") {
+      return this.http.post(url, JSON.stringify(storyObject), this.options);
+    } else {
+      return this.http.put(url + "/" + storyObject.id, JSON.stringify(storyObject), this.options);
+    }
   }
 
   /**
@@ -55,12 +63,13 @@ export class HttpServices {
    */
   deletePost(storyObject) {
     var parameters = this.storage.getStorage(),
-        url = parameters.url +
-              this.separator +
-              parameters.stage +
-              this.separator +
-              parameters.deletePost;
+        url = [ 
+            parameters.url,
+            parameters.stage,
+            "posts"
+        ].join(this.separator);
+    console.log("save " + url);
 
-    return this.http.post(url, JSON.stringify({ id: storyObject.id }), this.options);
+    return this.http.delete(url + "/" + storyObject.id, this.options);
   }
 }
