@@ -1,7 +1,7 @@
 import { Component, OnInit } from "angular2/core";
 import { HttpServices } from "../http.services";
 import { StorageServices } from "../storage.services";
-declare var _: any;
+declare let _: any;
 
 @Component({
   selector: "my-app",
@@ -66,23 +66,22 @@ export class Blog implements OnInit {
    * Save or edit story
    */
   saveStory() {
-    var message = "",
+    let message = "",
         action = "new";
 
     this.newStoryFormVisible = false;
 
-    if(_.isEmpty(this.editableItem.id)) {
+    if (_.isEmpty(this.editableItem.id)) {
       message = "New story is successfully added!";
-      this.editableItem.id = new String(this.posts.length + 1);
       this.editableItem.date = new Date().getTime();
-    }else{
+    } else {
       action = "edit";
-      message = "Story is successfully modified!"
+      message = "Story is successfully modified!";
     }
 
     this.httpServices.savePost(action, this.editableItem).subscribe(() => {
       this.getPosts();
-      if(!_.isEmpty(message)) {
+      if (!_.isEmpty(message)) {
         this.alert = {
           type: "success",
           message: message,
@@ -91,7 +90,6 @@ export class Blog implements OnInit {
       }
     });
 
-
     this.editableItem = {};
   }
 
@@ -99,10 +97,13 @@ export class Blog implements OnInit {
    * Saving aws settings
    */
   saveAWSSettingsClicked() {
-    if(!_.isEmpty(this.awsSettings.url)) {
-      this.storage.setStorage(this.awsSettings);
-      this.setSettingsFormVisible = false;
+    if (_.isEmpty(this.awsSettings.url)) {
+        return;
     }
+
+    this.storage.setStorage(this.awsSettings);
+    this.setSettingsFormVisible = false;
+    this.getPosts();
   }
 
   editButtonPressed(item) {

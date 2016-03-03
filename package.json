@@ -18,10 +18,13 @@
     "aws",
     "jaws",
     "serverless",
+    "angular",
+    "angular2",
+    "typescript",
     "hackathon",
     "sc5"
   ],
-  "author": "Alex Kozlov <alex.kozlov@sc5.io>",
+  "author": "SC5 <info@sc5.io>",
   "license": "MIT",
   "private": false,
   "bugs": {

@@ -1,19 +1,12 @@
 import { Injectable } from "angular2/core";
-declare var _: any;
+declare let _: any;
 
 @Injectable()
 export class StorageServices {
-  constructor() {}
-
   getStorage() {
     if (this.isStorageEmpty()) {
       return {
-        url: "",
-        stage: "",
-        deletePost: "",
-        newPost: "",
-        editPost: "",
-        getPosts: ""
+        url: ""
       };
     } else {
       return JSON.parse(window.localStorage.getItem("aws_settings"));

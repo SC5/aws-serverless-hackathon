@@ -15,18 +15,23 @@ export class HttpServices {
   public separator = "/" ;
 
   /**
+   * Prepare url
+   * 
+   * @returns {String}
+   */
+  getUrl() {
+    let parameters = this.storage.getStorage();
+
+    return parameters.url;
+  }
+
+  /**
    * Fetch stories from REST
    *
    * @returns {Observable<Response>}
    */
   getPosts() {
-    var parameters = this.storage.getStorage(),
-        url = [ 
-            parameters.url,
-            parameters.stage,
-            "posts"
-        ].join(this.separator);
-    console.log("save " + url);
+    let url = this.getUrl();
 
     return this.http.get(url, this.options);
   }
@@ -39,18 +44,12 @@ export class HttpServices {
    * @returns {Observable<Response>}
    */
   savePost(action, storyObject) {
-    var parameters = this.storage.getStorage(),
-        url = [ 
-            parameters.url,
-            parameters.stage,
-            "posts"
-        ].join(this.separator);
-    console.log("save " + url);
-    
-    if (action==="new") {
+    let url = this.getUrl();
+
+    if (action === "new") {
       return this.http.post(url, JSON.stringify(storyObject), this.options);
     } else {
-      return this.http.put(url + "/" + storyObject.id, JSON.stringify(storyObject), this.options);
+      return this.http.put(url + this.separator + storyObject.id, JSON.stringify(storyObject), this.options);
     }
   }
 
@@ -62,14 +61,8 @@ export class HttpServices {
    * @returns {Observable<Response>}
    */
   deletePost(storyObject) {
-    var parameters = this.storage.getStorage(),
-        url = [ 
-            parameters.url,
-            parameters.stage,
-            "posts"
-        ].join(this.separator);
-    console.log("save " + url);
+    let url = this.getUrl() + this.separator + storyObject.id;
 
-    return this.http.delete(url + "/" + storyObject.id, this.options);
+    return this.http.delete(url, this.options);
   }
 }
