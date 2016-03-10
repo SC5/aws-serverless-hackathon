@@ -19,3 +19,6 @@ npm install
 ```bash
 npm start
 ```
+
+### Feedback
+mikael.puittinen@sc5.io
