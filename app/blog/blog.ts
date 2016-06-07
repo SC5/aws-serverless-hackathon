@@ -101,6 +101,7 @@ export class Blog implements OnInit {
         return;
     }
 
+    this.awsSettings.url = this.awsSettings.url.trim();
     this.storage.setStorage(this.awsSettings);
     this.setSettingsFormVisible = false;
     this.getPosts();
