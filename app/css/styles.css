@@ -54,3 +54,7 @@
   float: right;
   margin-top: 10px;
 }
+
+.btn {
+  text-transform: uppercase;
+}
