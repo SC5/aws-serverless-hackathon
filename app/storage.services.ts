@@ -1,5 +1,6 @@
 import { Injectable } from "angular2/core";
-declare let _: any;
+// declare let _: any;
+import * as _ from 'lodash';
 
 @Injectable()
 export class StorageServices {
