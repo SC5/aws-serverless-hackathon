@@ -31,7 +31,7 @@ gulp.task('compile:ts', ['clean:ts'], shell.task([
 gulp.task('bundle:app', ['compile:ts'], () => {
   return getBuilder('./systemjs.config.js')
     .then((builder) => {
-      return builder.buildStatic('app', './dist/bundledapp.js', { minify: false })
+      return builder.buildStatic('app', './dist/app.js', { minify: false })
     })
 });
 
@@ -46,13 +46,21 @@ gulp.task('copy:css', () => {
     .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('copy:dependencies', () => {
+  return gulp.src([
+    './node_modules/angular2/bundles/angular2-polyfills.js',
+    './node_modules/lodash/lodash.min.js'
+  ],{ base: './node_modules' })
+    .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('copy:app', () => {
   return gulp.src(['./app/**/*.html'], { base: '.' })
     .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('dist', (done) => {
-  runSequence('clean:dist', 'compile:ts', 'bundle', 'copy:css', 'copy:app', () => {
+  runSequence('clean:dist', 'bundle', 'copy:css', 'copy:app', 'copy:dependencies', () => {
     done();
   });
 });

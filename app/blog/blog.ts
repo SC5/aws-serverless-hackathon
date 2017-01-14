@@ -1,19 +1,17 @@
 import { Component, OnInit } from "angular2/core";
 import { HttpServices } from "../http.services";
-import { StorageServices } from "../storage.services";
 declare let _: any;
 
 @Component({
   selector: "my-app",
   templateUrl: "app/blog/blog.html",
   providers: [
-    HttpServices,
-    StorageServices
+    HttpServices
   ]
 })
 
 export class Blog implements OnInit {
-  constructor (private httpServices: HttpServices, private storage: StorageServices) {}
+  constructor (private httpServices: HttpServices) {}
 
   public newStoryFormVisible = false;
   public alert = {
@@ -24,13 +22,12 @@ export class Blog implements OnInit {
   public editableItem;
   public posts = [];
   public setSettingsFormVisible = false;
-  public awsSettings = this.storage.getStorage();
 
   /**
    * Run it on initialization
    */
   ngOnInit() {
-    if (this.storage.isStorageEmpty()) {
+    if (this.httpServices.getUrl() === null) {
       this.setSettingsFormVisible = true;
     } else {
       this.getPosts();
@@ -63,7 +60,7 @@ export class Blog implements OnInit {
   }
 
   /**
-   * Save or edit story
+   * Save or edit post
    */
   saveStory() {
     let message = "",
@@ -94,26 +91,16 @@ export class Blog implements OnInit {
   }
 
   /**
-   * Saving aws settings
+   * Edit post
+   * @param item
    */
-  saveAWSSettingsClicked() {
-    if (_.isEmpty(this.awsSettings.url)) {
-        return;
-    }
-
-    this.awsSettings.url = this.awsSettings.url.trim();
-    this.storage.setStorage(this.awsSettings);
-    this.setSettingsFormVisible = false;
-    this.getPosts();
-  }
-
   editButtonPressed(item) {
     this.newStoryFormVisible = true;
     this.editableItem = item;
   }
 
   /**
-   * Delete story
+   * Delete post
    *
    * @param item {Object}
    */
@@ -123,7 +110,7 @@ export class Blog implements OnInit {
       this.alert = {
         visible: true,
         type: "danger",
-        message: "Story is successfully deleded!"
+        message: "Story is successfully deleted!"
       };
     });
   }

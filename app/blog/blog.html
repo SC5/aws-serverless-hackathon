@@ -1,16 +1,7 @@
 <div *ngIf="setSettingsFormVisible" class="col-sm-12">
   <div class="jumbotron">
     <h2>Welcome to serverless blog workshop</h2>
-    <p>Please, add backend parameters and save it.</p>
-  </div>
-  <div class="col sm-12 aws-settings__holder">
-    <input [(ngModel)]="awsSettings.url" name="url" type="text" class="form-control" placeholder="Url (e.g.): https://6b2z1n4hb4.execute-api.eu-west-1.amazonaws.com/dev/posts" aria-describedby="url">
-    <button type="button"
-            name="button"
-            class="btn btn-lg btn-success"
-            (click)="saveAWSSettingsClicked()">
-      save settings
-    </button>
+    <p>Please, define apiEndpoint to http.services.ts.</p>
   </div>
 </div>
 
