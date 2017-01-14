@@ -8,8 +8,6 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
       AccessControl: Private
-      VersioningConfiguration:
-        Status: Suspended
   BlogBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
