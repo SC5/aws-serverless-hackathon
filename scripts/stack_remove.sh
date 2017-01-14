@@ -1,12 +1,12 @@
 #!/bin/bash
 
 STACK_NAME=blog-workshop-frontend
-REGION=us-east-1
+REGION=""
 
 while getopts ":r:n:" opt; do
   case $opt in
     r)
-      REGION=$OPTARG
+      REGION="--region $OPTARG"
       ;;
     n)
       STACK_NAME=$OPTARG
@@ -18,14 +18,14 @@ while getopts ":r:n:" opt; do
 done
 
 # Get bucket name from stack
-BUCKET="$(aws cloudformation describe-stack-resource --stack-name $STACK_NAME --logical-resource-id BlogBucket --query 'StackResourceDetail.PhysicalResourceId')"
+BUCKET="$(aws cloudformation describe-stack-resource --stack-name $STACK_NAME $REGION --logical-resource-id BlogBucket --query 'StackResourceDetail.PhysicalResourceId')"
 
 # Remove files from bucket
 echo "removing files from $BUCKET"
-aws s3 rm s3://"${BUCKET//\"}" --recursive --region $REGION
+aws s3 rm s3://"${BUCKET//\"}" --recursive $REGION
 
 # Delete stack
-echo "remove stack \"$STACK_NAME\" from $REGION"
-aws cloudformation delete-stack --stack-name $STACK_NAME --region $REGION
+echo "remove stack \"$STACK_NAME\""
+aws cloudformation delete-stack --stack-name $STACK_NAME $REGION
 
-aws cloudformation wait stack-delete-complete --stack-name $STACK_NAME
+aws cloudformation wait stack-delete-complete --stack-name $STACK_NAME $REGION

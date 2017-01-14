@@ -10,8 +10,8 @@
     "typings": "typings",
     "postinstall": "typings install",
     "dist": "gulp dist",
-    "deploy": "./scripts/stack_deploy.sh",
-    "remove": "./scripts/stack_remove.sh"
+    "deploy-stack": "./scripts/stack_deploy.sh",
+    "remove-stack": "./scripts/stack_remove.sh"
   },
   "repository": {
     "type": "git",
