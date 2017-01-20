@@ -13,7 +13,9 @@ git clone git@github.com:SC5/aws-serverless-hackathon.git
 ```bash
 npm install
 ```
-* Now you ready to go!!!
+
+### Setup
+Add API endpoint url to config.ts
 
 ### Run it
 ```bash
