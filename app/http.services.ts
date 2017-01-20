@@ -1,10 +1,10 @@
 import { Injectable } from "angular2/core";
 import { Http, Headers } from "angular2/http";
-import { StorageServices } from "./storage.services";
+import { apiEndpoint } from "./config"
 
 @Injectable()
 export class HttpServices {
-  constructor (private http: Http, private storage: StorageServices) {}
+  constructor (private http: Http) {}
 
   public options = {
     headers: new Headers({
@@ -20,9 +20,7 @@ export class HttpServices {
    * @returns {String}
    */
   getUrl() {
-    let parameters = this.storage.getStorage();
-
-    return parameters.url;
+    return apiEndpoint === '' ? null : apiEndpoint;
   }
 
   /**

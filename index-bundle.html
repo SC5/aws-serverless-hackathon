@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>SC5 Serverless blog workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Just favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/manifest.json">
+    <link rel="mask-icon" href="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#da532c ">
+    <meta name="msapplication-TileImage" content="http://www.sc5.io/wp-content/themes/sc5/dist/images/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff ">
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
+    <script src="angular2/bundles/angular2-polyfills.js"></script>
+    <script src="lodash/lodash.min.js"></script>
+    <script src="app.js"></script>
+
+  </head>
+
+  <!-- 3. Display the application -->
+  <body>
+    <div class="container-fluid">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <div class="col-sm-12 blog__header">
+          <h1>Serverless blog workshop</h1>
+        </div>
+        <my-app>[ Loading... ]</my-app>
+        <div class="col-sm-12 blog__footer">
+          <h5>powered by <a href="http://www.sc5.io">SC5</a></h5>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+
+    <script>
+      console.log("%c\n       ...,.            .,,,.       .........\n    .5555555555     5555555555     55555555555,\n   5555.   5555.   55555/, .5555  .555.......\n   5555           55555           .555\n   55555555..    ,5555            .5555555555.\n     .555555555. ,555/             ,5555555555\n           .5555. 5555                     5555\n  555.      .555/ ,5555/      5.  .,,     .5555\n  55555555555555    555555555555..555555555555\n     55555555/        .5555555,    .5555555/\n\n", "color: #ff2837"),
+      console.log("We have great opportunities for curious hackers - run sc5.careers() to find out more!"),
+      window.sc5 = {
+        careers: function() {
+          window.location = "http://www.sc5.io/careers?from=console-aws-hackathon"
+        }
+      }
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,46 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Template for blog workshop web application"
+Resources:
+  BlogBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      AccessControl: Private
+  BlogBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: BlogBucket
+      PolicyDocument:
+        Version: '2008-10-17'
+        Statement:
+        - Sid: AllowPublicRead
+          Effect: Allow
+          Principal:
+            AWS: "*"
+          Action: s3:GetObject
+          Resource:
+            Fn::Join:
+            - ''
+            - - 'arn:aws:s3:::'
+              - Ref: BlogBucket
+              - "/*"
+        - Sid: AllowPublicList
+          Effect: Allow
+          Principal:
+            AWS: "*"
+          Action: s3:ListBucket
+          Resource:
+            Fn::Join:
+            - ''
+            - - 'arn:aws:s3:::'
+              - Ref: BlogBucket
+              - ''
+Outputs:
+  BlogBucketName:
+    Value:
+      Ref: BlogBucket
+  BlogBucketWebsiteURL:
+    Value: !GetAtt BlogBucket.WebsiteURL
