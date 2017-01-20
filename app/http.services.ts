@@ -1,5 +1,6 @@
 import { Injectable } from "angular2/core";
 import { Http, Headers } from "angular2/http";
+import { apiEndpoint } from "./config"
 
 @Injectable()
 export class HttpServices {
@@ -19,8 +20,6 @@ export class HttpServices {
    * @returns {String}
    */
   getUrl() {
-    const apiEndpoint = '';
-
     return apiEndpoint === '' ? null : apiEndpoint;
   }
 
